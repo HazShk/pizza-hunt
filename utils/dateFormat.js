@@ -71,8 +71,8 @@ module.exports = (
 
   let hour;
   // check for 24-hr time
-  if (dateObj.getHours > 12) {
-    hour = Math.floor(dateObj.getHours() / 2);
+  if (dateObj.getHours() > 12) {
+    hour = dateObj.getHours() - 12;
   } else {
     hour = dateObj.getHours();
   }
@@ -81,7 +81,8 @@ module.exports = (
     hour = 12;
   }
 
-  const minutes = dateObj.getMinutes();
+  // always show two digits for minutes (e.g. 05 instead of 5)
+  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
 
   // set `am` or `pm`
   let periodOfDay;
