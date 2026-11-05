@@ -35,9 +35,12 @@ const PizzaSchema = new Schema(
   },
 );
 
-// get total count of comments on retrieval
-PizzaSchema.virtual("commentCount").get(function () {
-  return this.comments.length;
+// get total count of comments and replies on retrieval
+PizzaSchema.virtual('commentCount').get(function() {
+  return this.comments.reduce(
+    (total, comment) => total + (comment.replies ? comment.replies.length : 0) + 1,
+    0
+  );
 });
 
 const Pizza = model("Pizza", PizzaSchema);
