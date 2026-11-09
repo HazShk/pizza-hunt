@@ -5,8 +5,8 @@ const pizzaController = {
     console.log("'👨‍🍳 getAllPizza is cooking!'");
     Pizza.find({})
       .populate({
-        path: "comments",
-        select: "-__v",
+        path: 'comments',
+        select: '--v'
       })
       .select("-__v")
       .sort({ _id: -1 })
@@ -19,10 +19,11 @@ const pizzaController = {
 
   // get one pizza by id
   getPizzaById({ params }, res) {
+    console.log("👨‍🍳 E. getPizzaById cooking for id", params.id);
     Pizza.findOne({ _id: params.id })
       .populate({
         path: "comments",
-        select: "-__v",
+        select: "--v",
       })
       .select("-__v")
       .then((dbPizzaData) => {
@@ -40,7 +41,7 @@ const pizzaController = {
 
   // create pizza
   createPizza({ body }, res) {
-    console.log('👨‍🍳 createPizza received:', body);
+    console.log("👨‍🍳 createPizza received:", body);
     Pizza.create(body)
       .then((dbPizzaData) => res.json(dbPizzaData))
       .catch((err) => res.status(400).json(err));
