@@ -45,6 +45,7 @@ const handlePizzaSubmit = event => {
   }
 
   const formData = { pizzaName, createdBy, size, toppings };
+  console.log('🟢 1. browser: sending this to the kitchen:', formData);
 
   fetch('/api/pizzas', {
     method: 'POST',
@@ -56,6 +57,7 @@ const handlePizzaSubmit = event => {
   })
     .then(response => response.json())
     .then(postResponse => {
+      console.log('🟢 2. browser: kitchen sent back:', postResponse);
       alert('Pizza created successfully!');
       console.log(postResponse);
     })

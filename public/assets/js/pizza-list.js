@@ -1,9 +1,11 @@
 const $pizzaList = document.querySelector('#pizza-list');
 
 const getPizzaList = () => {
+  console.log('🟢 1. browser: asking the kitchen for pizzas...');
   fetch('/api/pizzas')
     .then(response => response.json())
     .then(pizzaListArr => {
+      console.log('🟢 2. browser: got this back:', pizzaListArr);
       pizzaListArr.forEach(printPizza);
     })
     .catch(err => {
@@ -12,6 +14,7 @@ const getPizzaList = () => {
 };
 
 const printPizza = ({ _id, pizzaName, toppings, size, commentCount, createdBy, createdAt }) => {
+  console.log('🖨️ 3. printing a card for:', pizzaName);
   const pizzaCard = `
     <div class="col-12 col-lg-6 flex-row">
       <div class="card w-100 flex-column">

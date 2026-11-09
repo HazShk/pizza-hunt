@@ -2,6 +2,7 @@ const { Pizza } = require("../models");
 
 const pizzaController = {
   getAllPizza(req, res) {
+    console.log("'👨‍🍳 getAllPizza is cooking!'");
     Pizza.find({})
       .populate({
         path: "comments",
@@ -39,6 +40,7 @@ const pizzaController = {
 
   // create pizza
   createPizza({ body }, res) {
+    console.log('👨‍🍳 createPizza received:', body);
     Pizza.create(body)
       .then((dbPizzaData) => res.json(dbPizzaData))
       .catch((err) => res.status(400).json(err));
